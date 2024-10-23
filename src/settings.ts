@@ -41,39 +41,83 @@ export class PDFAnnotationPluginSetting {
     this.useFolderNames = true;
     this.sortByTopic = true;
     this.exportPath = '';
-    this.desiredAnnotations = "Text, Highlight, Underline";
-    this.noteTemplateExternalPDFs =
-      '{{body}}\n' +
-      '\n' +
-      '* *noted by {{author}} at page {{pageNumber}} on {{filepath}}*\n' +
-      '\n';
-    this.noteTemplateInternalPDFs =
-      '{{body}}\n' +
-      '\n' +
-      '* *noted by {{author}} at page {{pageNumber}} on [[{{filepath}}]]*\n' +
-      '\n';
-    this.highlightTemplateExternalPDFs =
-      '> {{highlightedText}}\n' +
-      '\n' +
-      '{{body}}\n' +
-      '\n' +
-      '* *highlighted by {{author}} at page {{pageNumber}} on {{filepath}}*\n' +
-      '\n';
-    this.highlightTemplateInternalPDFs =
-      '> {{highlightedText}}\n' +
-      '\n' +
-      '{{body}}\n' +
-      '\n' +
-      '* *highlighted by {{author}} at page {{pageNumber}} on [[{{filepath}}]]*\n' +
-      '\n';
-    this.parsedSettings = {
-      desiredAnnotations: this.parseCommaSeparatedStringToArray(this.desiredAnnotations)
-    };
-  }
+        this.desiredAnnotations = "Text, Highlight, Underline";
+        this.noteTemplateExternalPDFs =
+            '{{body_highlightedText}}'; // '*{{body}}* *noted by {{author}} at page {{pageNumber}} on {{filepath}}*';
+        this.noteTemplateInternalPDFs =
+            '{{body_highlightedText}}'; // '{{body}} noted by {{author}} at page {{pageNumber}} on [[{{filepath}}]]';
+        this.highlightTemplateExternalPDFs =
+            '{{body_highlightedText}}'; // {{body}} highlighted by {{author}} at page {{pageNumber}} on {{filepath}}';
+        this.highlightTemplateInternalPDFs =
+            '{{body_highlightedText}}'; // {{body}} highlighted by {{author}} at page {{pageNumber}} on [[{{filepath}}]]';
+        this.parsedSettings = {
+            desiredAnnotations: this.parseCommaSeparatedStringToArray(this.desiredAnnotations)
+        };
+        this.level1RGB = [255, 173, 91];
+        this.level2RGB = [255, 255, 0];
+        this.level3RGB = [209, 223, 235];
+        this.summryRGB = [0, 255, 0];
+        this.imprttRGB = [252, 54, 54];
+        this.hueTol = 5;
+        this.LumiTol = 30;
+        this.lvl1_format = "";
+        this.lvl2_format = "";
+        this.lvl3_format = "";
+        this.sumr_format = "**";
+        this.impt_format = "==";
+        this.note_format = "*";
+        this.note_preamb = "Note:";
+        this.lvl1_icon = "🟠";
+        this.lvl2_icon = "🟡";
+        this.lvl3_icon = "🔵";
+        this.sumr_icon = "🟢";
+        this.impt_icon = "🔴";
+        this.ext_lvl1_icon = "📌";
+        this.ext_lvl2_icon = "";
+        this.ext_lvl3_icon = "🔷";
+        this.ext_sumr_icon = "📝";
+        this.ext_impt_icon = "⚠️";
+        this.unkn_icon = "❔";
+        // Other emojis: ⚫⚪🟣🟤❔
+        this.begin_prb = `---
+MOC: []
+Source: \"[[{fileName}]]\"
+Projets:
+Notes liées:
+Date: \" {dateTime}\"
+tags:
+    - \"#Type/Note/Info\"
+---`;
+        this.pdf_f_prb = `
+---
+## *Infos note*
+### *Références*
+- [[{fileName}]]
 
-  public parseCommaSeparatedStringToArray(desiredAnnotations: string): string[] {
-    return desiredAnnotations.split(',').map((item) => item.trim());
-  }
+### *Liens*
+- 
+
+### *Concepts clés / Synthèse*
+- 
+
+---
+\`\`\`table-of-contents
+title:==**_Sommaire de la note :_**==
+style:nestedOrderedList
+\`\`\`
+---
+`;
+        this.perso_prb = "### Synthèse perso";
+        this.conds_prb = "### Format condensé";
+        this.detal_prb = "### Format détaillé";
+        this.no_an_prb = "- **Aucune annotation**";
+
+    }// end of constructor
+
+
+    public parseCommaSeparatedStringToArray(desiredAnnotations: string): string[] {
+        return desiredAnnotations.split(',').map((item) => item.trim());
+    }
 }
 
 export class PDFAnnotationPluginSettingTab extends PluginSettingTab {
@@ -141,6 +185,8 @@ export class PDFAnnotationPluginSettingTab extends PluginSettingTab {
         }),
       );
 
+
+        // Setting: use 1st line as Topic
     new Setting(containerEl)
       .setName('Sort by Topic')
       .setDesc(
