@@ -110,10 +110,10 @@ export class PDFAnnotationPluginSetting {
         this.ext_es_suf= "(ext mm essential)"
         this.exportPath = '';
         this.desiredAnnotations = "Text, Highlight, Underline";
-        this.noteTemplateExternalPDFs = "{{body_highlightedText}} [🔗]()";
-        this.noteTemplateInternalPDFs = "{{body_highlightedText}} [🔗]()";
-        this.highlightTemplateExternalPDFs = "{{body_highlightedText}} [🔗]()";
-        this.highlightTemplateInternalPDFs = "{{body_highlightedText}} [🔗]()";
+        this.noteTemplateExternalPDFs = "{{body_highlightedText}}";
+        this.noteTemplateInternalPDFs = "{{body_highlightedText}}";
+        this.highlightTemplateExternalPDFs = "{{body_highlightedText}}";
+        this.highlightTemplateInternalPDFs = "{{body_highlightedText}}";
             '{{highlightedText}} // {{body}} highlighted by {{author}} at page {{pageNumber}} on [[{{filepath}}]]';
         this.level1RGB = [255, 173, 91];
         this.level2RGB = [255, 255, 0];

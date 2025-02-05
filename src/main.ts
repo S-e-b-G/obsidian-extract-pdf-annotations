@@ -1208,9 +1208,9 @@ mindmap-plugin: basic
                 " "
         }
 
-        return l_cmd+this.noteFromExternalPDFsTemplate(
+        return this.noteFromExternalPDFsTemplate(
             this.getTemplateVariablesForAnnotation(annotation),
-        );
+        )+l_cmd;
     }
 
     getContentForNoteFromInternalPDF(annotation: any): string {
@@ -1224,9 +1224,9 @@ mindmap-plugin: basic
                 " "
         }
 
-        return l_cmd+this.noteFromInternalPDFsTemplate(
+        return this.noteFromInternalPDFsTemplate(
             this.getTemplateVariablesForAnnotation(annotation),
-        );
+        )+l_cmd;
     }
 
     getContentForHighlightFromExternalPDF(annotation: any): string {
@@ -1240,9 +1240,9 @@ mindmap-plugin: basic
                 " "
         }
 
-        return l_cmd+this.highlightFromExternalPDFsTemplate(
+        return this.highlightFromExternalPDFsTemplate(
             this.getTemplateVariablesForAnnotation(annotation),
-        );
+        )+l_cmd;
     }
 
     getContentForHighlightFromInternalPDF(annotation: any): string {
@@ -1256,9 +1256,9 @@ mindmap-plugin: basic
                 " "
         }
 
-        return l_cmd+this.highlightFromInternalPDFsTemplate(
+        return this.highlightFromInternalPDFsTemplate(
             this.getTemplateVariablesForAnnotation(annotation),
-        );
+        )+l_cmd;
     }
 
 	async saveHighlightsToFileAndOpenIt(filePath: string, mdString: string) {
