@@ -34,8 +34,8 @@ function searchQuad(
 			start;
             return txt + x.str.substr(start, lenc);
         }
-    }, "")
-    return mycontent.trim()
+    }, "");
+    return mycontent.trim();
 }
 
 
@@ -102,6 +102,7 @@ async function loadPage(
 	desiredAnnotations: string[]
 ) {
     let annotations = await page.getAnnotations();
+
     annotations = annotations.filter(function (anno) {
         return desiredAnnotations.indexOf(anno.subtype) >= 0;
     });
