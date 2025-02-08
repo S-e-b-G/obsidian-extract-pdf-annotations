@@ -172,7 +172,7 @@ style:nestedOrderedList
         this.detal_prb  = "### Detailed format";
         this.no_an_prb  = "- **No annotation**";
         this.lnk_tog    = false;
-        this.lnk_cmd    = "[🔗](obsidian://shell-commands?execute=CMD_ID_FROM_SHELL_COMMANDS&_page_number={{page_number}}&_file_path={{file_path}})";
+        this.lnk_cmd    = " (p. {{page_number}}) [🔗](obsidian://shell-commands?execute=CMD_ID_FROM_SHELL_COMMANDS&_page_number={{page_number}}&_file_path={{file_path}})";
 
         this.parsedSettings = {
             desiredAnnotations: this.parseCommaSeparatedStringToArray(this.desiredAnnotations)
@@ -978,7 +978,7 @@ To do this:'});
             .setDesc('Command to add to the link so that (for instance) the PDF file is opened at the specified page. \
 Use {{page_number}} where the page should be placed, and \
 {{file_path}} where the PDF file name/path should be placed. \
-Eg.: [🔗](obsidian://shell-commands?execute=CMD_ID_FROM_SHELL_COMMANDS&_page_number={{page_number}}&_file_path={{file_path}})')
+Eg.: " (p. {{page_number}}) [🔗](obsidian://shell-commands?execute=CMD_ID_FROM_SHELL_COMMANDS&_page_number={{page_number}}&_file_path={{file_path}})"')
             .addTextArea(text => text
                 .setValue(this.plugin.settings.lnk_cmd)
                 .onChange(async (value) => {

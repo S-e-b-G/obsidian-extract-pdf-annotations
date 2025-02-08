@@ -426,7 +426,7 @@ mindmap-plugin: basic
                 {   l_levelIcon = lvl1_icon; }
                 else {
                     l_levelIcon = ext_lvl1_icon;
-                    l_note_sfx  = " (p." + anno.pageNumber + ")";
+                    // l_note_sfx  = " (p. " + anno.pageNumber + ")";
                 }
             }
             else if( (Math.abs((100*(annotColorHue-color_lvl2Hue))/color_maxHue) <= this.settings.hueTol)  &&
