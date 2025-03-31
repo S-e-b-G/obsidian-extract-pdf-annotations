@@ -161,8 +161,8 @@ tags:
 -
 
 ---
+## *Sommaire de la note* %% fold %%
 \`\`\`table-of-contents
-title:==**_Sommaire de la note :_**==
 style:nestedOrderedList
 \`\`\`
 ---
