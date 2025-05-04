@@ -127,7 +127,8 @@ async function loadPage(
         }
         anno.folder = containingFolder;
         anno.file = file;
-        anno.filepath = file.path; // we need a direct string property in the templates
+		let filePath = (file.path).substring(0, 9) + encodeURIComponent((file.path).substring(9));
+        anno.filepath = filePath; // we need a direct string property in the templates
         anno.pageNumber = pagenum;
         anno.author = anno.titleObj.str;
         anno.body = anno.contentsObj.str;

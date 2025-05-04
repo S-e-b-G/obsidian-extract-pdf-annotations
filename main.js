@@ -6981,8 +6981,8 @@ tags:
 -
 
 ---
+## *Sommaire de la note* %% fold %%
 \`\`\`table-of-contents
-title:==**_Sommaire de la note :_**==
 style:nestedOrderedList
 \`\`\`
 ---
@@ -7515,7 +7515,8 @@ function loadPage(page, pagenum, file, containingFolder, total, desiredAnnotatio
         }
         anno.folder = containingFolder;
         anno.file = file;
-        anno.filepath = file.path;
+        let filePath = file.path.substring(0, 9) + encodeURIComponent(file.path.substring(9));
+        anno.filepath = filePath;
         anno.pageNumber = pagenum;
         anno.author = anno.titleObj.str;
         anno.body = anno.contentsObj.str;
